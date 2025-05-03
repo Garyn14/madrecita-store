@@ -34,7 +34,7 @@ const findUnitById = (id: number): Unit => {
   return units.find((unit) => unit.id === id) as Unit;
 };
 
-export const products: ProductResponse[] = [
+const products: ProductResponse[] = [
   // lacteos
   {
     id: 1,
@@ -62,7 +62,7 @@ export const products: ProductResponse[] = [
   },
   {
     id: 4,
-    name: 'Gloria zero lactosa',
+    name: 'Gloria zero lactosa lata',
     price: 4.30,
     amount: 390,
     category: findCategoryById(1),
@@ -100,6 +100,113 @@ export const products: ProductResponse[] = [
     category: findCategoryById(1),
     unit: findUnitById(5),
   },
+  {
+    id: 9,
+    name: 'Leche ideal cremosita',
+    price: 3.80,
+    amount: 390,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+  {
+    id: 10,
+    name: 'Leche pura vida',
+    price: 3.20,
+    amount: 390,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+  {
+    id: 11,
+    name: 'Leche Gloria azúl lata',
+    price: 4.00,
+    amount: 390,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+  {
+    id: 12,
+    name: 'Yogurt gloria',
+    price: 6.50,
+    amount: 1,
+    category: findCategoryById(1),
+    unit: findUnitById(3),
+  },
+  {
+    id: 13,
+    name: 'Yogurt gloria',
+    price: 2.00,
+    amount: 180,
+    category: findCategoryById(1),
+    unit: findUnitById(5)
+  },
+  {
+    id: 14,
+    name: 'Batti mix',
+    price: 3.50,
+    amount: 146,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+  {
+    id: 15,
+    name: 'yopi',
+    price: 3.00,
+    amount: 100,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+  {
+    id: 16,
+    name: 'Mantequilla sello de oro',
+    price: 1.50,
+    amount: 45,
+    category: findCategoryById(1),
+    unit: findUnitById(5)
+  },
+  {
+    id: 17,
+    name: 'Mantequilla sello de oro',
+    price: 2.50,
+    amount: 90, 
+    category: findCategoryById(1),
+    unit: findUnitById(5)
+  },
+  {
+    id: 18,
+    name: 'Mantequilla sello de oro',
+    price: 4.00,
+    amount: 200, 
+    category: findCategoryById(1),
+    unit: findUnitById(5)
+  },
+  {
+    id: 19,
+    name: 'Mantequilla Gloria',
+    price: 6.00,
+    amount: 90,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+  {
+    id: 20,
+    name: 'Mantequilla Manty',
+    price: 5.50,
+    amount: 300,
+    category: findCategoryById(1),
+    unit: findUnitById(5),
+  },
+
+  // bebidas
+  {
+    id: 21,
+    name: 'Frugos del Valle',
+    price: 5.00,
+    amount: 1,
+    category: findCategoryById(2),
+    unit: findUnitById(3),
+
+  }
 
   // { id: 2, name: 'Queso Fresco', price: 8.0, amount: 5, category: categories[0], unit: units[0] },
   // { id: 3, name: 'Yogur Fresa', price: 3.5, amount: 15, category: categories[0], unit: units[2] },
@@ -131,3 +238,8 @@ export const products: ProductResponse[] = [
   // { id: 29, name: 'Queso Edam', price: 10.0, amount: 6, category: categories[0], unit: units[0] },
   // { id: 30, name: 'Milo Sachet', price: 1.0, amount: 50, category: categories[4], unit: units[1] },
 ];
+
+export const productsData = () => {
+  // return products order by category name
+  return [...products].sort((a, b) => a.category.name.localeCompare(b.category.name));
+};

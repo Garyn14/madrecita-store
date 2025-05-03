@@ -1,13 +1,22 @@
 import React from 'react';
 import { Box, Container, Paper, useTheme } from '@mui/material';
 import Header from './Header';
+import Search from './Search';
 import { colors } from '../theme/theme';
 
 interface MainContainerProps {
   children: React.ReactNode;
+  onSearch: (searchTerm: string) => void;
+  onCategorySelect: (categoryId: number) => void;
+  selectedCategory: number;
 }
 
-const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
+const MainContainer: React.FC<MainContainerProps> = ({ 
+  children, 
+  onSearch, 
+  onCategorySelect,
+  selectedCategory 
+}) => {
   const theme = useTheme();
 
   return (
@@ -20,7 +29,10 @@ const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
       }}
     >
       {/* Header - The Header component now handles its own spacing */}
-      <Header />
+      <Header 
+        onCategorySelect={onCategorySelect}
+        selectedCategory={selectedCategory}
+      />
       
       {/* Background gradient */}
       <Box
@@ -60,12 +72,15 @@ const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
         </svg>
       </Box>
       
+      {/* Search component */}
+      <Search onSearch={onSearch} />
+      
       {/* Main content */}
       <Container 
         maxWidth="lg" 
         component="main"
         sx={{
-          mt: { xs: 8, sm: 10, md: 12 },
+          mt: { xs: 2, sm: 3, md: 4 }, // Reduced top margin to account for search component
           mb: 6,
           position: 'relative',
           zIndex: 1,

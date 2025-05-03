@@ -13,20 +13,34 @@ import {
   useTheme,
   ListItemIcon,
   Divider,
+  Chip,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import CategoryIcon from "@mui/icons-material/Category";
 import { colors } from "../theme/theme";
+import { categories } from "../data/data";
 
 interface HeaderProps {
   children?: ReactNode;
+  onCategorySelect: (categoryId: number) => void;
+  selectedCategory: number;
 }
 
-const Header: React.FC<HeaderProps> = ({ children }) => {
+const Header: React.FC<HeaderProps> = ({ 
+  children, 
+  onCategorySelect, 
+  selectedCategory 
+}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  // Add "Todos" category at the beginning
+  const allCategories = [
+    { id: 0, name: "Todos" },
+    ...categories
+  ];
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -40,7 +54,12 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       setDrawerOpen(open);
     };
 
-  const menuItems = ["Categoría 1", "Categoría 2", "Categoría 3"];
+  const handleCategoryClick = (categoryId: number) => {
+    onCategorySelect(categoryId);
+    if (isMobile) {
+      setDrawerOpen(false);
+    }
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -77,22 +96,23 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
               textShadow: "0 1px 2px rgba(0,0,0,0.1)"
             }}
           >
-            Mi Tienda
+            La chingana
           </Typography>
 
           {/* Menú horizontal en desktop */}
           {!isMobile && (
-            <Box sx={{ display: "flex" }}>
-              {menuItems.map((item) => (
+            <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "flex-end", maxWidth: "70%" }}>
+              {allCategories.slice(0, 6).map((category) => (
                 <Typography
-                  key={item}
+                  key={category.id}
+                  onClick={() => handleCategoryClick(category.id)}
                   sx={{
-                    mx: 2,
+                    mx: 1.5,
                     cursor: "pointer",
-                    fontWeight: 500,
+                    fontWeight: selectedCategory === category.id ? 700 : 500,
                     position: "relative",
                     py: 2,
-                    color: "rgba(255,255,255,0.9)",
+                    color: selectedCategory === category.id ? "#fff" : "rgba(255,255,255,0.9)",
                     "&:hover": {
                       color: "#fff",
                       "&::after": {
@@ -104,16 +124,32 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                       position: "absolute",
                       bottom: 12,
                       left: 0,
-                      width: 0,
+                      width: selectedCategory === category.id ? "100%" : 0,
                       height: 2,
                       backgroundColor: colors.color5,
                       transition: "width 0.3s ease"
                     }
                   }}
                 >
-                  {item}
+                  {category.name}
                 </Typography>
               ))}
+              {allCategories.length > 6 && (
+                <IconButton
+                  size="small"
+                  color="inherit"
+                  aria-label="more categories"
+                  onClick={toggleDrawer(true)}
+                  sx={{
+                    ml: 1,
+                    "&:hover": {
+                      backgroundColor: "rgba(255,255,255,0.1)"
+                    }
+                  }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              )}
             </Box>
           )}
 
@@ -167,37 +203,51 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           <Box sx={{ p: 2, display: "flex", alignItems: "center", mb: 1 }}>
             <StorefrontIcon sx={{ color: colors.color2, mr: 1, fontSize: 24 }} />
             <Typography variant="h6" sx={{ fontWeight: "bold", color: colors.color1 }}>
-              Mi Tienda
+              Categorías
             </Typography>
           </Box>
           
           <Divider sx={{ mb: 2 }} />
           
           <List>
-            {menuItems.map((item) => (
+            {allCategories.map((category) => (
               <ListItem 
                 component="div" 
-                key={item} 
+                key={category.id} 
+                onClick={() => handleCategoryClick(category.id)}
                 sx={{ 
                   py: 1.5,
                   cursor: 'pointer',
+                  backgroundColor: selectedCategory === category.id ? `${colors.color3}20` : 'transparent',
                   "&:hover": {
                     backgroundColor: `${colors.color3}15`,
                   }
                 }}
               >
-                <ListItemIcon sx={{ minWidth: 40, color: colors.color2 }}>
+                <ListItemIcon sx={{ minWidth: 40, color: selectedCategory === category.id ? colors.color1 : colors.color2 }}>
                   <CategoryIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary={item}
+                  primary={category.name}
                   sx={{
                     "& .MuiTypography-root": {
-                      fontWeight: 500,
-                      color: colors.color1,
+                      fontWeight: selectedCategory === category.id ? 700 : 500,
+                      color: selectedCategory === category.id ? colors.color1 : 'inherit',
                     },
                   }}
                 />
+                {selectedCategory === category.id && (
+                  <Chip 
+                    size="small" 
+                    label="Seleccionado" 
+                    sx={{ 
+                      backgroundColor: `${colors.color3}30`,
+                      color: colors.color1,
+                      fontSize: '0.7rem',
+                      height: 24
+                    }} 
+                  />
+                )}
               </ListItem>
             ))}
           </List>
