@@ -1,0 +1,120 @@
+/* App.css - Configuraciones globales */
+
+/* Reset básico y configuración de box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Configuración de la tipografía global */
+  body {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f8f9fa;
+    color: #212529;
+    line-height: 1.5;
+  }
+  
+  /* Estilos para los enlaces */
+  a {
+    color: #23ac8d; /* color2 de tu paleta */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #029375; /* color1 de tu paleta */
+  }
+  
+  /* Configuración de los encabezados */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+  }
+  
+  h4 {
+    font-size: 1.5rem;
+  }
+  
+  h5 {
+    font-size: 1.25rem;
+  }
+  
+  h6 {
+    font-size: 1rem;
+  }
+  
+  /* Clases de utilidad para tus colores */
+  .color1 { color: #029375; }
+  .color2 { color: #23ac8d; }
+  .color3 { color: #44c6a5; }
+  .color4 { color: #64dfbd; }
+  .color5 { color: #85f8d5; }
+  
+  .bg-color1 { background-color: #029375; }
+  .bg-color2 { background-color: #23ac8d; }
+  .bg-color3 { background-color: #44c6a5; }
+  .bg-color4 { background-color: #64dfbd; }
+  .bg-color5 { background-color: #85f8d5; }
+  
+  /* Estilos para Material UI components */
+  .MuiButton-contained {
+    text-transform: none !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+  }
+  
+  /* Animaciones básicas */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  /* Estilos para el scrollbar (opcional) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #23ac8d; /* color2 */
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #029375; /* color1 */
+  }
+  
+  /* Media queries para responsividad */
+  @media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+  }
