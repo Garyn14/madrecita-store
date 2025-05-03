@@ -56,13 +56,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       >
         <Toolbar>
           {/* Ícono de bodega/tienda */}
-          <StorefrontIcon
-            sx={{
-              mr: 2,
+          <StorefrontIcon 
+            sx={{ 
+              mr: 2, 
               fontSize: 30,
               color: "#fff",
-              filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.1))",
-            }}
+              filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.1))"
+            }} 
           />
 
           {/* Título */}
@@ -74,10 +74,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
               fontWeight: "bold",
               letterSpacing: 1,
               color: "#fff",
-              textShadow: "0 1px 2px rgba(0,0,0,0.1)",
+              textShadow: "0 1px 2px rgba(0,0,0,0.1)"
             }}
           >
-            La chigana de Doñis Doñis
+            Mi Tienda
           </Typography>
 
           {/* Menú horizontal en desktop */}
@@ -97,7 +97,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                       color: "#fff",
                       "&::after": {
                         width: "100%",
-                      },
+                      }
                     },
                     "&::after": {
                       content: '""',
@@ -107,8 +107,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
                       width: 0,
                       height: 2,
                       backgroundColor: colors.color5,
-                      transition: "width 0.3s ease",
-                    },
+                      transition: "width 0.3s ease"
+                    }
                   }}
                 >
                   {item}
@@ -127,8 +127,8 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
               onClick={toggleDrawer(true)}
               sx={{
                 "&:hover": {
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                },
+                  backgroundColor: "rgba(255,255,255,0.1)"
+                }
               }}
             >
               <MenuIcon />
@@ -141,7 +141,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
       <Toolbar />
 
       {/* Main content */}
-      <Box sx={{ p: 2 }}>{children}</Box>
+      <Box sx={{ p: 2 }}>
+        {children}
+      </Box>
 
       {/* Drawer para el menú móvil */}
       <Drawer
@@ -163,29 +165,25 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           sx={{ pt: 2 }}
         >
           <Box sx={{ p: 2, display: "flex", alignItems: "center", mb: 1 }}>
-            <StorefrontIcon
-              sx={{ color: colors.color2, mr: 1, fontSize: 24 }}
-            />
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: "bold", color: colors.color1 }}
-            >
+            <StorefrontIcon sx={{ color: colors.color2, mr: 1, fontSize: 24 }} />
+            <Typography variant="h6" sx={{ fontWeight: "bold", color: colors.color1 }}>
               Mi Tienda
             </Typography>
           </Box>
-
+          
           <Divider sx={{ mb: 2 }} />
-
+          
           <List>
             {menuItems.map((item) => (
-              <ListItem
-                button
-                key={item}
-                sx={{
+              <ListItem 
+                component="div" 
+                key={item} 
+                sx={{ 
                   py: 1.5,
+                  cursor: 'pointer',
                   "&:hover": {
                     backgroundColor: `${colors.color3}15`,
-                  },
+                  }
                 }}
               >
                 <ListItemIcon sx={{ minWidth: 40, color: colors.color2 }}>

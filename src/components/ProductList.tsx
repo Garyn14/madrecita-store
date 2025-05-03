@@ -1,7 +1,7 @@
 import React from 'react';
 import { products } from '../data/data';
 import ProductCard from './ProductCard';
-import { Grid, Typography, Box, Container } from '@mui/material';
+import { Typography, Box, Container } from '@mui/material';
 import { colors } from '../theme/theme';
 
 const ProductList: React.FC = () => {
@@ -30,10 +30,11 @@ const ProductList: React.FC = () => {
         </Typography>
       </Box>
 
-      <Grid 
-        container 
-        spacing={3}
+      <Box 
         sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          margin: -1.5, // Compensate for padding
           animation: 'fadeIn 0.6s ease-out',
           '@keyframes fadeIn': {
             '0%': { opacity: 0, transform: 'translateY(10px)' },
@@ -42,14 +43,16 @@ const ProductList: React.FC = () => {
         }}
       >
         {products.map((product, index) => (
-          <Grid 
-            item 
-            key={product.id} 
-            xs={12} 
-            sm={6} 
-            md={4} 
-            lg={3}
+          <Box 
+            key={product.id}
             sx={{
+              width: {
+                xs: '100%',
+                sm: '50%',
+                md: '33.33%',
+                lg: '25%'
+              },
+              padding: 1.5,
               animation: `fadeIn 0.5s ease-out ${index * 0.1}s`,
               '@keyframes fadeIn': {
                 '0%': { opacity: 0, transform: 'translateY(10px)' },
@@ -59,9 +62,9 @@ const ProductList: React.FC = () => {
             }}
           >
             <ProductCard product={product} />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
       
       {products.length === 0 && (
         <Box 
