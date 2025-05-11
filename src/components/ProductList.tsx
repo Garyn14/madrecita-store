@@ -3,7 +3,7 @@ import { productsData } from '../data/data';
 import ProductCard from './ProductCard';
 import { Typography, Box, Container } from '@mui/material';
 import { colors } from '../theme/theme';
-import { normalizeText } from '../utils/stringUtils';
+import { matchesSearch } from '../utils/stringUtils';
 
 interface ProductListProps {
   searchTerm?: string;
@@ -20,18 +20,14 @@ const ProductList: React.FC<ProductListProps> = ({
   // Filter products based on search term and selected category
   const filteredProducts = useMemo(() => {
     return allProducts.filter(product => {
-      // Filter by search term (normalize both the product name and search term)
-      const normalizedProductName = normalizeText(product.name);
-      const normalizedSearchTerm = normalizeText(searchTerm);
-      
-      const matchesSearch = searchTerm === '' || 
-        normalizedProductName.includes(normalizedSearchTerm);
+      // Filter by search term using the enhanced search matching
+      const matchesSearchTerm = matchesSearch(product.name, searchTerm);
       
       // Filter by category (0 means "All categories")
       const matchesCategory = selectedCategory === 0 || 
         product.category.id === selectedCategory;
       
-      return matchesSearch && matchesCategory;
+      return matchesSearchTerm && matchesCategory;
     });
   }, [allProducts, searchTerm, selectedCategory]);
 
